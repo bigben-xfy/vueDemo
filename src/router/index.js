@@ -5,6 +5,7 @@
 import App from '../App'
 
 const home = r => require(['../page/home'], r)
+const test = r => require(['../page/test'], r)
 
 export default [{
 	path: '/',
@@ -16,6 +17,9 @@ export default [{
 		}, {
 			path: '/home',
 			component: home
+		}, {
+			path: '/test',
+			component: test
 		}
 	]
 }]

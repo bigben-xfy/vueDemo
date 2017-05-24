@@ -7,20 +7,36 @@ import VueRouter from 'vue-router'
 import routes from './router'
 import store from './store'
 import { sync } from 'vuex-router-sync'
-import ElementUI from 'element-ui'
 import './config/rem'
 import FastClick from 'fastclick'
+import 'font-awesome/css/font-awesome.css'
+import 'mo-js'
 
-import 'element-ui/lib/theme-default/index.css'
 import './style'
+
+import {
+	menu,
+	submenu,
+	menuItem,
+	menuItemGroup,
+	loading
+} from 'element-ui'
+
+Vue.use(menu)
+Vue.use(submenu)
+Vue.use(menuItem)
+Vue.use(menuItemGroup)
+
+Vue.use(loading.directive)
+Vue.prototype.$loading = loading.service
 
 if ('addEventListener' in document) {
 	document.addEventListener('DOMContentLoaded', function() {
-		FastClick.attach(document.body);
+		FastClick.attach(document.body)
 	}, false);
 }
 
-Vue.use(ElementUI)
+//Vue.use(ElementUI)
 
 Vue.use(VueRouter)
 const router = new VueRouter({

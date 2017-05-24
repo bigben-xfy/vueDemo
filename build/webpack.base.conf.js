@@ -3,7 +3,9 @@ let webpack = require('webpack')
 let path = require('path')
 let config = require('../config')
 let utils = require('./utils')
+let LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 let projectRoot = path.resolve(__dirname, '../')
+
 
 let env = process.env.NODE_ENV
 let useCssSourceMap
@@ -44,7 +46,7 @@ module.exports = {
             'src': path.resolve(__dirname, '../src'),
             'assets': path.resolve(__dirname, '../src/assets'),
             'components': path.resolve(__dirname, '../src/components'),
-	        'jquery': 'jquery'
+	        /*'jquery': 'jquery'*/
         }
     },
     resolveLoader: {
@@ -58,7 +60,11 @@ module.exports = {
             test: /\.js$/,
             loader: 'babel',
             include: projectRoot,
-            exclude: /node_modules/
+            exclude: /node_modules/,
+	        'options': {
+		        'plugins': ['lodash'],
+		        'presets': [['env', { 'modules': false, 'targets': { 'node': 4 } }]]
+	        }
         }, {
             test: /\.json$/,
             loader: 'json'
@@ -89,6 +95,10 @@ module.exports = {
         ]
     },
 	plugins: [
+		new LodashModuleReplacementPlugin({
+			'collections': true,
+			'paths': true
+		})
 		/*new webpack.ProvidePlugin({
 			$: "jquery",
 			jQuery: "jquery"
